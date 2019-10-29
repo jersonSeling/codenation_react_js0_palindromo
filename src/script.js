@@ -1,43 +1,41 @@
 const resultado = document.querySelector("#resultado");
 
-const teste = "Socorram-me, subi no ônibus em Marrocos";
+//const teste = "Socorram-me, subi no ônibus em Marrocos";
 //const teste = "A Rita, sobre vovô, verbos atira.";
-//const teste = "Olé! Maracujá, caju, caramelo.";
+const teste = "Olé! Maracujá, caju, caramelo.";
 
-function retiraAcento(palavra)
-{
+function retirarAcento(palavra)
+{  
   const com_acento = "áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ";
   const sem_acento = "aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC";
   let nova = '';
   for(let i = 0; i < palavra.length; i++) {
-    //const caracter = palavra.substr(i, 1);
+
 	const caracter = palavra.charAt(i);
 	
-	if (caracter == "."){
-	  console.log(caracter);
-	  console.log(com_acento.search(caracter));
-	}
-	
-    if (com_acento.search(caracter) >= 0) {
-      nova += sem_acento.charAt(com_acento.search(caracter));	  
+  //cuidado ao usar string.search, ela usa regex!
+  //https://stackoverflow.com/questions/39823619/javascript-check-if-string-contains-a-full-stop
+    
+    if (com_acento.indexOf(caracter) >= 0) {
+      nova += sem_acento.charAt(com_acento.indexOf(caracter));	  
     }
     else {
       nova += caracter;
     }
-	console.log(nova);
+	// console.log(nova);
   }
   return nova;
 }
 
-function retiraPontuacao(palavra)
+function retirarPontuacao(palavra)
 {
   const pontuacao = ".,;:!?-";
 
   let nova = '';
   
   for(let i = 0; i < palavra.length; i++) {
-    const caracter = palavra.substr(i, 1);
-    if (pontuacao.search(caracter) < 0) {
+    const caracter = palavra.charAt(i);
+    if (pontuacao.indexOf(caracter) < 0) {
       nova += caracter;
     }
   }
@@ -45,28 +43,27 @@ function retiraPontuacao(palavra)
 }
 
 
-const EhPalindromo = (valor) => {
+const EhPalindromo = (valor) => {  
+
+  const valMinusculo = valor.toLowerCase();
   
-  //remover as pontuações primeiro por causa disto:
-  //https://stackoverflow.com/questions/39823619/javascript-check-if-string-contains-a-full-stop
-  const v0 = retiraPontuacao(valor);
+  const valSemPontuacao = retirarPontuacao(valMinusculo);
   
-  const v01 = retiraAcento(v0).toLowerCase();
-  //return v01;
+  const valSemAcento = retirarAcento(valSemPontuacao);
   
-  const v1 = [...v01]
+  const valArray = [...valSemAcento];
         
-  const v2 = v1.filter(el => (el !== " "));  
+  const valArraySemEspaco = valArray.filter(el => (el !== " "));  
   
-  const v3 = v2.join("");  
+  const valFormatado = valArraySemEspaco.join("");  
   
-  v2.reverse();
+  valArraySemEspaco.reverse();
   
-  const v4 = v2.join("");
+  const valFormatadoReverso = valArraySemEspaco.join("");
    
-  return (v3 === v4) + " "+ v3 + " " + v4;
+  //return (v3 === v4) + " "+ v3 + " " + v4;
   
-  if (v3 === v4) {
+  if (valFormatado === valFormatadoReverso) {
     return "sim"
   } 
   else {
