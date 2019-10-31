@@ -1,10 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="utf-8">
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Desafio js-0</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<p id="resultado">-</p>
-<script src="script.js"></script>
+
+    <div class="container-conteudo">
+        <div class="conteudo">
+
+            <div class="container" id="titulo-head">
+                <div class="item">
+                    Verificador de Palíndromo
+                </div>
+                <div class="item">
+                    <button id="button-apagar" data-test="limpar-dados">
+                        Apagar Histórico
+                    </button>
+                </div>
+            </div>    
+
+            <div class="container">
+                
+                    <input class="item-input" id="input-palindromo" data-test="entrada" type="text">
+                
+            </div>   
+
+            <div id="grid">
+                <div class="container" id="grid-head">
+                    <div class="item">
+                        Frase
+                    </div>
+                    <div class="item">
+                        Palíndromo
+                    </div>            
+                </div>     
+            </div>      
+        </div>
+    </div>
+
+    <script defer src="palindromo.js"></script>
+    <script defer src="index.js"></script>
+    <script defer src="apagar-historico.js"></script>    
 </body>
 </html>
